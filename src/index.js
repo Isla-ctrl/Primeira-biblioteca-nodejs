@@ -49,7 +49,7 @@ async function lerArquivo() {
 const caminhoArquivo = process.argv[2];
 
 if(!caminhoArquivo) {
-    exibirErro('Por favor, informe o caminho do arquivo! EX: node index.js ./arquivo/texto.txt');
+    exibirErro('Por favor, informe o caminho do arquivo! EX: node src/index.js ./arquivo/texto.txt');
     return;
 }
 
@@ -61,7 +61,7 @@ try {
     const duplicadas = encontrarPalavrasDuplicadas(texto);
     exibirDuplicadas(duplicadas);
 } catch (erro) {
-    exibirErro(`Erro ao ler o arquivo no caminho "${caminhoArquivo}".`, erro.message);
+    exibirErro(`O arquivo no caminho "${caminhoArquivo}" não existe.`, erro.message);
     }
 }
 
