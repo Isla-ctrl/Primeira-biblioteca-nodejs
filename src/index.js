@@ -11,17 +11,17 @@ function encontrarPalavrasDuplicadas(texto) {
     }
     const textoLimpo = texto
         .toLowerCase()// Remove letras maiúsculas
-        .replace(/[^a-zA-Zà-úÀ-Ú\s]/g, ''); // Remove caracteres que não sejam letras ou espaços
-    //split - divide o texto em um array de palavras, usando espaço como separador
+        .replace(/[^a-zA-Zà-úÀ-Ú\s]/g, ''); // Remove caracteres que não sejam letras ou espaços (é uma expressão regular ou regex e existe formas bem variadas de escrever uma regex)
+    //split - divide o texto em um array de palavras, usando espaço como separador e selecionador das palavras
     //filter(Boolean) - remove strings vazias do array e é nossa rede de segurança.
     const palavras = textoLimpo.split(/\s+/).filter(Boolean);
-    //reduce - reduz o array de palavras a um objeto com a contagem de cada palavra
+    //reduce - reduz o array de palavras criando um objeto que conta a quantidade de vezes que cada palavra aparece. O acumulador é um objeto onde as chaves são as palavras e os valores são as contagens.
     //{} - diz para o reduce que o valor inicial do acumulador é um objeto vazio
     const contagem = palavras.reduce((acumulador, palavra) => {
       acumulador[palavra] = (acumulador[palavra] || 0) + 1;
       return acumulador;
     }, {});
-    //Object.entries - converte o objeto de contagem em um array de pares [palavra, quantidade]
+    //Object.entries - converte o objeto de contagem em um array de pares [palavra, quantidade] ou seja, extrai as informações de um objeto.
     return Object.entries(contagem).filter(([palavra, quantidade]) => quantidade > 1);
 }
 
@@ -45,7 +45,7 @@ function exibirErro(mensagem, detalhe) {
 }
 
 async function lerArquivo() {
-//process.argv - array que contém os argumentos passados para o script nodejs. O índice 2 é usado para acessar o terceiro argumento, que é o caminho do arquivo fornecido pelo usuário.
+//process.argv - array que contém os vetores de argumento passados para o script nodejs. O índice 2 é usado para acessar o terceiro argumento, que é o caminho do arquivo fornecido pelo usuário.
 const caminhoArquivo = process.argv[2];
 
 if(!caminhoArquivo) {
