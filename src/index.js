@@ -1,6 +1,7 @@
 import encontrarPalavrasDuplicadas from './services/contaDuplicadas.js';
 import exibirDuplicadas from './views/cli.js';
 import exibirErro from './utils/funcaoErro.js';
+import resultadoArquivoEstilizado from './utils/helper.js';
 //Require - importa módulos e bibliotecas do Node.js
 //fs - módulo do Node.js para manipulação de arquivos
 import fs from 'fs';
@@ -33,7 +34,7 @@ try {
 
 async function criaESalvaArquivo(listaPalavras, endereco) {
     const arquivoNovo = `${endereco}/resultado.txt`;
-    const textoPalavras = JSON.stringify(listaPalavras);
+    const textoPalavras = resultadoArquivoEstilizado(listaPalavras);    
     try {
         await fs.promises.writeFile(arquivoNovo, textoPalavras);
         console.log('Arquivo criado') 
