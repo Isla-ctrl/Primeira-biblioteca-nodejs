@@ -3,6 +3,7 @@ import exibirDuplicadas from './views/cli.js';
 import exibirErro from './utils/funcaoErro.js';
 import resultadoArquivoEstilizado from './utils/helper.js';
 import { Command } from 'commander';
+import chalk from 'chalk';
 //Require - importa módulos e bibliotecas do Node.js
 //fs - módulo do Node.js para manipulação de arquivos
 import fs from 'fs';
@@ -23,7 +24,7 @@ program
 
         //Verifica se o usuário forneceu os caminhos do arquivo de texto e do diretório de destino. Se algum deles estiver ausente, exibe uma mensagem de erro e ajuda.
         if (!texto || !destino) {
-            exibirErro('Por favor informe o caminho do arquivo de texto e o diretório de destino. EX: node src/index.js -t arquivo/texto-web.txt -d ./resultados');
+            exibirErro(chalk.red('Por favor informe o caminho do arquivo de texto e o diretório de destino. EX: node src/index.js -t arquivo/texto-web.txt -d ./resultados'));
             program.help();
             return;
         }
@@ -33,9 +34,9 @@ program
 
         try {
             await lerArquivo(caminhoTexto, caminhoDestino);
-            console.log('Processamento concluído com sucesso.');
+            console.log(chalk.green('Processamento concluído com sucesso.'));
         } catch (erro) {
-            exibirErro('Falha ao processar o arquivo.', erro.message);
+            exibirErro(chalk.red('Falha ao processar o arquivo.'), erro.message);
         }
     });
 
@@ -59,7 +60,7 @@ async function criaESalvaArquivo(listaPalavras, endereco) {
 
     try {
         await fs.promises.writeFile(arquivoNovo, textoPalavras);
-        console.log('Arquivo criado') 
+        console.log(chalk.green('Arquivo criado com sucesso.')) 
     } catch (erro) {
         throw erro;
     }
