@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/Isla-ctrl/Primeira-biblioteca-nodejs/issues"
   },
-  "homepage": "https://github.com/Isla-ctrl/Primeira-biblioteca-nodejs#readme"
+  "homepage": "https://github.com/Isla-ctrl/Primeira-biblioteca-nodejs#readme",
+  "dependencies": {
+    "commander": "^15.0.0"
+  }
 }
