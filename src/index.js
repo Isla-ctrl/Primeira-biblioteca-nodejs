@@ -9,15 +9,19 @@ import fs from 'fs';
 //path - módulo para manipulação de caminhos de arquivos e diretórios, roda em qualquer sistema sem dar erro de caminho
 import path from 'path';
 
+//cria um objeto do tipo Command, que é usado para definir e gerenciar os comandos da linha de comando. Ele fornece uma interface para criar comandos, opções e argumentos.
 const program = new Command();
 
 program
     .version('0.0.1')
     .option('-t, --texto <string>', 'Caminho do texto a ser processado')
     .option('-d, --destino <string>', 'Caminho do diretório de destino para salvar o arquivo de resultado')
+    //action - define a função que será executada quando o comando for chamado. A função recebe um objeto options que contém os valores das opções definidas anteriormente.
     .action(async (options) => {
+        //Destructuring - extrai os valores dos objetos que passei a ele, mas para ele funcionar os nomes dentro das chaves tem que ser identicos aos nomes que o Commander usou no objeto.
         const { texto, destino } = options;
 
+        //Verifica se o usuário forneceu os caminhos do arquivo de texto e do diretório de destino. Se algum deles estiver ausente, exibe uma mensagem de erro e ajuda.
         if (!texto || !destino) {
             exibirErro('Por favor informe o caminho do arquivo de texto e o diretório de destino. EX: node src/index.js -t arquivo/texto-web.txt -d ./resultados');
             program.help();
@@ -28,7 +32,7 @@ program
         const caminhoDestino = path.resolve(destino);
 
         try {
-            lerArquivo(caminhoTexto, caminhoDestino);
+            await lerArquivo(caminhoTexto, caminhoDestino);
             console.log('Processamento concluído com sucesso.');
         } catch (erro) {
             exibirErro('Falha ao processar o arquivo.', erro.message);
